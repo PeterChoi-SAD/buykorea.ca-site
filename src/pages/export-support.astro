@@ -1,5 +1,6 @@
 ---
 import Base from '../layouts/Base.astro';
+import Gallery from '../components/Gallery.astro';
 import PageBanner from '../components/PageBanner.astro';
 const items = [
   ['시장조사', '캐나다 시장 동향과 경쟁 제품을 조사합니다.'],
@@ -17,7 +18,8 @@ const items = [
       <div class="cols">
         {items.map(([t, d]) => (<div class="col"><h3>{t}</h3><p>{d}</p></div>))}
       </div>
-      <p style="margin-top:48px"><a class="btn solid" href="/contact/">상담 문의하기</a></p>
     </section>
+    <Gallery title="지원 사례" items={[["/assets/events/okta1.jpg","월드옥타 밴쿠버지회 수출 상담회"],["/assets/events/festival.jpg","Vancouver Chinese Festival 참여"],["/assets/events/kexpo.jpg","K-EXPO CANADA 2025"]]} />
+    <p style="margin-top:56px"><a class="btn solid" href="/contact/">상담 문의하기</a></p>
   </div>
 </Base>

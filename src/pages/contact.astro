@@ -13,30 +13,37 @@ const rows = [
 <Base title="문의" description={`${site.name} 문의 - 전화, 이메일, 위치 및 담당자 안내`}>
   <PageBanner title="Let’s Connect" sub="캐나다 진출·수출 상담은 아래 연락처로 문의해 주세요." image="/assets/banners/contact.jpg" />
   <div class="wrap">
-    <section class="block">
-      <div class="cl">
-        {rows.map(([k, v, href]) => (
-          <a class="crow" href={href} target={k === '주소' ? '_blank' : undefined} rel={k === '주소' ? 'noopener' : undefined}><span>{k}</span><strong>{v}</strong></a>
-        ))}
+    <section class="block split">
+      <div>
+        <div class="head"><h2>연락처</h2></div>
+        <div class="cl">
+          {rows.map(([k, v, href]) => (
+            <a class="crow" href={href} target={k === '주소' ? '_blank' : undefined} rel={k === '주소' ? 'noopener' : undefined}><span>{k}</span><strong>{v}</strong></a>
+          ))}
+        </div>
+        <img class="cimg" src="/assets/events/office.jpg" alt="BuyKorea.ca 상담 사무실" loading="lazy" />
       </div>
-    </section>
-    <section class="block">
-      <div class="head"><h2>담당자</h2></div>
-      <div class="cols">
-        {team.map((m) => (
-          <div class="col"><h3>{m.name}</h3><p>{m.title}</p><a class="mail" href={`mailto:${m.email}`}>{m.email}</a></div>
-        ))}
+      <div>
+        <div class="head"><h2>담당자</h2></div>
+        <div class="team">
+          {team.map((m) => (
+            <div class="col"><h3>{m.name}</h3><p>{m.title}</p><a class="mail" href={`mailto:${m.email}`}>{m.email}</a></div>
+          ))}
+        </div>
       </div>
     </section>
   </div>
 </Base>
 <style>
+  .cimg { width: 100%; aspect-ratio: 16 / 10; object-fit: cover; border-radius: var(--radius); margin-top: 32px; }
+  .split { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: start; }
+  .team { display: grid; gap: 28px; }
+  @media (max-width: 860px) { .split { grid-template-columns: 1fr; gap: 48px; } }
   .cl { border-top: 1px solid var(--ink); }
-  .crow { display: grid; grid-template-columns: 140px 1fr; gap: 16px; align-items: baseline; padding: 26px 0; border-bottom: 1px solid var(--line); color: var(--ink); transition: padding .2s; }
+  .crow { display: grid; gap: 4px; padding: 22px 0; border-bottom: 1px solid var(--line); color: var(--ink); transition: padding .2s; }
   .crow:hover { text-decoration: none; padding-left: 10px; }
   .crow span { color: var(--muted); font-size: .95rem; }
-  .crow strong { font: 600 clamp(1.25rem, 3vw, 1.9rem)/1.3 var(--display); letter-spacing: -.02em; }
+  .crow strong { font: 600 clamp(1.2rem, 2.4vw, 1.6rem)/1.3 var(--display); letter-spacing: -.02em; }
   .crow:hover strong { color: var(--deep); }
   .mail { display: inline-block; margin-top: 10px; }
-  @media (max-width: 560px) { .crow { grid-template-columns: 1fr; gap: 4px; } }
 </style>

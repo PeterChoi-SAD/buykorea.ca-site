@@ -1,0 +1,16 @@
+---
+const { items, title } = Astro.props;
+---
+<section class="block">
+  {title && <div class="head"><h2>{title}</h2></div>}
+  <div class="gal">
+    {items.map(([src, cap]) => (
+      <figure><img src={src} alt={cap} loading="lazy" /><figcaption>{cap}</figcaption></figure>
+    ))}
+  </div>
+</section>
+<style>
+  .gal { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 24px; }
+  figure { margin: 0; } figure img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; border-radius: var(--radius); display: block; background: var(--mist); }
+  figcaption { margin-top: 10px; color: var(--muted); font-size: .92rem; }
+</style>

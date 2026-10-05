@@ -2,6 +2,7 @@
 import Base from '../layouts/Base.astro';
 import VendorCard from '../components/VendorCard.astro';
 import NewsCard from '../components/NewsCard.astro';
+import Partners from '../components/Partners.astro';
 import site from '../data/site.json';
 import vendors from '../data/vendors.json';
 import news from '../data/news.json';
@@ -38,6 +39,7 @@ const latest = [...news].sort((a, b) => b.date.localeCompare(a.date)).slice(0, 3
       <div class="head"><h2>벤더 소개</h2><a class="more" href="/vendors/">전체 보기 →</a></div>
       <div class="grid">{vendors.slice(0, 6).map((v) => <VendorCard v={v} />)}</div>
     </section>
+    <Partners />
   </div>
 </Base>
 

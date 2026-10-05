@@ -1,6 +1,8 @@
 ---
 import Base from '../layouts/Base.astro';
 import PageBanner from '../components/PageBanner.astro';
+import Partners from '../components/Partners.astro';
+import Gallery from '../components/Gallery.astro';
 import site from '../data/site.json';
 const services = [
   ['캐나다 마케팅', '제품 포지셔닝부터 현지 소비자 대상 홍보까지, 캐나다 시장에 맞춘 마케팅을 기획하고 실행합니다.',
@@ -13,12 +15,13 @@ const steps = [['시장조사', '진출 가능성과 경쟁 환경을 확인합�
 <Base title="소개" description="한국 기업의 캐나다 수출을 돕는 원스톱 컨설팅 - 캐나다 마케팅과 수입대행">
   <PageBanner title="소개" sub="한국에서 캐나다까지, 수출을 한 번에" image="/assets/banners/about.jpg" />
   <div class="wrap">
-    <article class="doc" style="max-width:780px">
+    <section class="block intro">
       <div class="prose">
         <p><strong>{site.name}</strong>는 한국 기업의 캐나다 수출을 돕는 <strong>원스톱 컨설팅 회사</strong>입니다. 캐나다 현지 법인으로서 현지 법규와 시장 흐름을 반영하고, 단순 중개를 넘어 <strong>마케팅과 수입대행</strong>까지 한 곳에서 해결합니다.</p>
         <p>한국 제품을 캐나다에 소개하려는 기업(Inbound), 캐나다의 좋은 자원을 한국으로 들여가려는 바이어(Outbound) 모두 상담하실 수 있습니다.</p>
       </div>
-    </article>
+      <img class="introimg" src="/assets/events/office.jpg" alt="BuyKorea.ca 상담 사무실" />
+    </section>
 
     <section class="block" style="padding-top:8px">
       <div class="head"><h2>제공 서비스</h2></div>
@@ -45,12 +48,17 @@ const steps = [['시장조사', '진출 가능성과 경쟁 환경을 확인합�
       </div>
     </section>
 
-    <p style="margin-top:32px"><a class="btn solid" href="/contact/">상담 문의하기</a></p>
+    <Gallery title="현장 활동" items={[["/assets/events/kexpo.jpg","K-EXPO CANADA 2025"],["/assets/events/festival.jpg","Vancouver Chinese Festival 참여 (2026.07)"],["/assets/events/okta1.jpg","월드옥타 밴쿠버지회 수출 상담회"]]} />
+    <Partners />
+    <p style="margin-top:56px"><a class="btn solid" href="/contact/">상담 문의하기</a></p>
     {site.contact_email && <p class="meta" style="margin-top:12px">이메일 <a href={`mailto:${site.contact_email}`}>{site.contact_email}</a> · 전화 {site.phone}</p>}
   </div>
 </Base>
 
 <style>
+  .intro { display: grid; grid-template-columns: 1.1fr .9fr; gap: 48px; align-items: center; padding-top: 64px; }
+  .intro .prose { font-size: 1.12rem; } .introimg { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; border-radius: var(--radius); }
+  @media (max-width: 760px) { .intro { grid-template-columns: 1fr; gap: 28px; } }
   .cols.two { grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); }
   .cols.steps { grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); }
   .step .num { display: block; font: 600 2.4rem/1 var(--display); color: var(--sky); margin-bottom: 14px; }
