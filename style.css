@@ -1,0 +1,16 @@
+:root{--bg:#fff;--fg:#1c2330;--m:#6b7482;--a:#0b5fff;--line:#e5e8ee;--soft:#f5f7fa}
+@media(prefers-color-scheme:dark){:root{--bg:#10141b;--fg:#e6e9ef;--m:#9aa3b2;--a:#6aa0ff;--line:#272e3a;--soft:#171c25}}
+*{box-sizing:border-box}body{margin:0;font:16px/1.7 -apple-system,"Apple SD Gothic Neo","Malgun Gothic",sans-serif;background:var(--bg);color:var(--fg)}
+.w{max-width:960px;margin:0 auto;padding:0 16px}a{color:var(--a);text-decoration:none}a:hover{text-decoration:underline}
+header{border-bottom:1px solid var(--line)}header .w{display:flex;justify-content:space-between;align-items:center;height:56px}
+.logo{font-weight:800;font-size:1.2rem;color:var(--fg)}nav a{margin-left:20px;color:var(--fg)}
+.hero{padding:48px 0 24px}.hero h1{font-size:1.9rem;margin:0 0 8px}.hero p{color:var(--m);margin:0}
+h2{margin:36px 0 12px;display:flex;justify-content:space-between;align-items:baseline}.more{font-size:.9rem;font-weight:400}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:16px}
+.card{display:block;border:1px solid var(--line);border-radius:10px;overflow:hidden;color:var(--fg);background:var(--soft)}.card:hover{text-decoration:none;border-color:var(--a)}
+.th{height:140px;background:#fff;display:flex;align-items:center;justify-content:center}.th img{max-width:100%;max-height:100%;object-fit:contain}
+.cb{padding:12px 14px}.cb h3{margin:4px 0;font-size:1rem;line-height:1.4}.m{color:var(--m);font-size:.88rem;margin:0}
+.tag{display:inline-block;font-size:.75rem;background:var(--a);color:#fff;border-radius:99px;padding:0 8px}
+article{max-width:720px;padding:24px 0}.hero-img{max-width:100%;border-radius:8px;margin:8px 0}.logo-img{max-height:120px;max-width:260px;margin:8px 0;background:#fff;padding:8px;border-radius:8px}
+.body img{max-width:100%}table.info{border-collapse:collapse;width:100%;margin:16px 0}.info th,.info td{text-align:left;padding:8px;border-bottom:1px solid var(--line);vertical-align:top}.info th{width:90px;color:var(--m);font-weight:600}
+footer{margin-top:60px;padding:24px 0;border-top:1px solid var(--line);color:var(--m);font-size:.88rem}
