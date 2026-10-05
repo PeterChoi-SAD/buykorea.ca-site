@@ -1,0 +1,24 @@
+---
+import Base from '../layouts/Base.astro';
+import PageBanner from '../components/PageBanner.astro';
+const items = [
+  ['시장조사', '캐나다 시장 동향과 경쟁 제품을 조사합니다.'],
+  ['바이어 컨택', '현지 바이어와의 연결과 상담을 지원합니다.'],
+  ['통관 및 시장 판매 테스트', '통관 절차를 지원하고 소량 판매로 시장 반응을 확인합니다.'],
+  ['온라인 판매 대행', '온라인 채널 입점과 판매를 대행합니다.'],
+  ['마케팅 캠페인', '현지 소비자를 대상으로 한 홍보와 마케팅을 진행합니다.'],
+  ['지사 운영', '캐나다 지사 설립과 현지 법인 운영을 자문합니다.'],
+];
+---
+<Base title="수출지원" description="한국 기업의 캐나다 진출을 위한 시장조사, 바이어 컨택, 통관, 온라인 판매, 마케팅, 지사 운영 지원">
+  <PageBanner title="수출지원" sub="Export Support" image="/assets/banners/export.jpg" />
+  <div class="wrap">
+    <div class="grid" style="margin-top:36px">
+      {items.map(([t, d], i) => (
+        <div class="card svc"><span class="tag">0{i + 1}</span><h3>{t}</h3><p class="meta">{d}</p></div>
+      ))}
+    </div>
+    <p style="margin-top:26px"><a class="more" href="/contact/">상담 문의하기 →</a></p>
+  </div>
+</Base>
+<style>.svc { padding: 18px 20px; border-left: 4px solid var(--accent); } .svc h3 { margin: 10px 0 6px; font-size: 1.1rem; }</style>
