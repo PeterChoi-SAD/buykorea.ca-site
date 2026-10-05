@@ -1,0 +1,12 @@
+---
+import { src } from '../lib.js';
+const { v } = Astro.props;
+---
+<a class="card" href={`/vendors/${v.slug}/`}>
+  <div class="th">{v.image && <img src={src(v.image)} alt={v.name} loading="lazy" />}</div>
+  <div class="cb">
+    {v.category && <span class="tag">{v.category}</span>}
+    <h3>{v.name}</h3>
+    <p class="meta">{v.region || v.address}</p>
+  </div>
+</a>

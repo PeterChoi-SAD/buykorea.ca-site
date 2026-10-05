@@ -1,0 +1,13 @@
+---
+import Base from '../../layouts/Base.astro';
+import NewsCard from '../../components/NewsCard.astro';
+import news from '../../data/news.json';
+const list = [...news].sort((a, b) => b.date.localeCompare(a.date));
+---
+<Base title="뉴스" description="캐나다 진출 한국 기업 관련 최신 뉴스">
+  <div class="wrap">
+    <h1 class="page">뉴스</h1>
+    <p class="meta" style="margin-bottom:22px">총 {list.length}건</p>
+    <div class="grid">{list.map((n) => <NewsCard n={n} />)}</div>
+  </div>
+</Base>

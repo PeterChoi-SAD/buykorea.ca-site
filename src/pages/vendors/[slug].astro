@@ -1,0 +1,30 @@
+---
+import Base from '../../layouts/Base.astro';
+import vendors from '../../data/vendors.json';
+import { toHtml, src } from '../../lib.js';
+export function getStaticPaths() {
+  return vendors.map((v) => ({ params: { slug: v.slug }, props: { v } }));
+}
+const { v } = Astro.props;
+const rows = [
+  ['분류', v.category], ['지역', v.region], ['주소', v.address], ['전화', v.phone],
+  ['이메일', v.email && !v.hide_email ? { href: `mailto:${v.email}`, text: v.email } : ''],
+  ['웹사이트', v.website ? { href: v.website, text: v.website, ext: true } : ''],
+].filter(([, x]) => x);
+---
+<Base title={v.name} description={`${v.name} - ${v.category} ${v.region}`.trim()} image={src(v.image)}>
+  <div class="wrap">
+    <article class="doc">
+      {v.category && <span class="tag">{v.category}</span>}
+      <h1>{v.name}</h1>
+      {v.image && <img class="logo-img" src={src(v.image)} alt={v.name} />}
+      {v.description && <div class="prose" set:html={toHtml(v.description)} />}
+      <table class="info">
+        {rows.map(([k, x]) => (
+          <tr><th>{k}</th><td>{typeof x === 'object' ? <a href={x.href} rel="noopener" target={x.ext ? '_blank' : undefined}>{x.text}</a> : x}</td></tr>
+        ))}
+      </table>
+      <a class="back" href="/vendors/">← 벤더 목록</a>
+    </article>
+  </div>
+</Base>

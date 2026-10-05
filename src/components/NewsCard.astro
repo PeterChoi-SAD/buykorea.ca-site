@@ -1,0 +1,11 @@
+---
+import { src } from '../lib.js';
+const { n } = Astro.props;
+---
+<a class="card" href={`/news/${n.id}/`}>
+  <div class="th cover">{n.image && <img src={src(n.image)} alt={n.title} loading="lazy" />}</div>
+  <div class="cb">
+    <p class="meta">{n.date}</p>
+    <h3>{n.title}</h3>
+  </div>
+</a>

@@ -1,0 +1,105 @@
+---
+import site from '../data/site.json';
+const { title, description = site.description, image, canonical } = Astro.props;
+const url = canonical ?? new URL(Astro.url.pathname, Astro.site).href;
+const full = title ? `${title} | ${site.name}` : `${site.name} - ${site.tagline}`;
+const path = Astro.url.pathname;
+const nav = [['/news/', '뉴스'], ['/vendors/', '벤더 소개'], ['/about/', '소개']];
+---
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{full}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={url} />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={full} />
+    <meta property="og:description" content={description} />
+    {image && <meta property="og:image" content={new URL(image, Astro.site).href} />}
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%23c8102e'/><circle cx='16' cy='16' r='6' fill='%230b2a5b'/></svg>" />
+  </head>
+  <body>
+    <header class="top">
+      <div class="wrap bar">
+        <a class="brand" href="/"><span class="dot"></span>{site.name}</a>
+        <nav>
+          {nav.map(([href, label]) => <a href={href} class:list={{ on: path.startsWith(href) }}>{label}</a>)}
+        </nav>
+      </div>
+    </header>
+    <main><slot /></main>
+    <footer>
+      <div class="wrap foot">
+        <strong>{site.name}</strong>
+        <span>{site.tagline}</span>
+        <span>© {new Date().getFullYear()} {site.company}</span>
+      </div>
+    </footer>
+  </body>
+</html>
+
+<style is:global>
+  :root {
+    --bg: #ffffff; --surface: #f5f7fb; --fg: #14213d; --muted: #66708a; --line: #e3e8f1;
+    --brand: #0b2a5b; --accent: #c8102e; --link: #1550c0; --radius: 14px;
+    --shadow: 0 1px 2px rgba(11,42,91,.06), 0 8px 24px rgba(11,42,91,.06);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root { --bg: #0d1220; --surface: #151c30; --fg: #e8ecf6; --muted: #99a3bd; --line: #25304b;
+      --brand: #8fb4ff; --accent: #ff5c74; --link: #8fb4ff; --shadow: none; }
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { margin: 0; word-break: keep-all; overflow-wrap: break-word; background: var(--bg); color: var(--fg);
+    font: 16px/1.75 -apple-system, BlinkMacSystemFont, 'Pretendard', 'Apple SD Gothic Neo', 'Malgun Gothic', 'Noto Sans KR', sans-serif; }
+  a { color: var(--link); text-decoration: none; } a:hover { text-decoration: underline; }
+  .wrap { max-width: 1040px; margin: 0 auto; padding: 0 20px; }
+  .top { position: sticky; top: 0; z-index: 10; background: color-mix(in srgb, var(--bg) 88%, transparent);
+    backdrop-filter: blur(10px); border-bottom: 1px solid var(--line); }
+  .bar { display: flex; align-items: center; justify-content: space-between; height: 62px; }
+  .brand { display: flex; align-items: center; gap: 10px; font-weight: 800; font-size: 1.15rem; color: var(--brand); letter-spacing: -.02em; }
+  .brand:hover { text-decoration: none; }
+  .dot { width: 14px; height: 14px; border-radius: 50%; background: var(--accent); box-shadow: 6px 0 0 -2px var(--brand); margin-right: 6px; }
+  nav a { margin-left: 22px; color: var(--fg); font-weight: 600; font-size: .95rem; padding: 6px 0; border-bottom: 2px solid transparent; }
+  nav a:hover { text-decoration: none; color: var(--accent); }
+  nav a.on { border-color: var(--accent); }
+  .hero { background: linear-gradient(135deg, #0b2a5b 0%, #1b4fa8 60%, #c8102e 140%); color: #fff; }
+  .hero .wrap { padding-top: 72px; padding-bottom: 72px; }
+  .hero h1 { margin: 0 0 12px; font-size: clamp(1.8rem, 4.5vw, 2.8rem); line-height: 1.25; letter-spacing: -.03em; }
+  .hero p { margin: 0 0 24px; max-width: 560px; opacity: .88; font-size: 1.05rem; }
+  .btns { display: flex; gap: 10px; flex-wrap: wrap; }
+  .btn { display: inline-block; padding: 10px 20px; border-radius: 999px; font-weight: 700; font-size: .95rem; }
+  .btn:hover { text-decoration: none; transform: translateY(-1px); }
+  .btn.primary { background: #fff; color: #0b2a5b; } .btn.ghost { border: 1px solid rgba(255,255,255,.6); color: #fff; }
+  section.block { padding: 48px 0 8px; }
+  .head { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 18px; }
+  .head h2, h1.page { margin: 0; font-size: 1.5rem; letter-spacing: -.02em; }
+  h1.page { font-size: 2rem; padding: 40px 0 8px; }
+  .more { font-size: .92rem; font-weight: 600; }
+  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; }
+  .card { display: flex; flex-direction: column; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius);
+    overflow: hidden; color: var(--fg); transition: transform .15s, box-shadow .15s; }
+  .card:hover { transform: translateY(-3px); box-shadow: var(--shadow); text-decoration: none; }
+  .card .th { height: 160px; background: #fff; display: flex; align-items: center; justify-content: center; padding: 10px; }
+  .card .th.cover { padding: 0; } .card .th.cover img { width: 100%; height: 100%; object-fit: cover; }
+  .card .th img { max-width: 100%; max-height: 100%; object-fit: contain; }
+  .card .cb { padding: 14px 16px 18px; } .card h3 { margin: 6px 0 4px; font-size: 1.02rem; line-height: 1.45; letter-spacing: -.01em; }
+  .meta { color: var(--muted); font-size: .86rem; margin: 0; }
+  .tag { display: inline-block; font-size: .74rem; font-weight: 700; background: color-mix(in srgb, var(--brand) 10%, transparent);
+    color: var(--brand); border-radius: 999px; padding: 1px 10px; }
+  .chips { display: flex; gap: 8px; flex-wrap: wrap; margin: 8px 0 24px; }
+  article.doc { max-width: 740px; margin: 0 auto; padding: 40px 0 24px; }
+  article.doc h1 { font-size: 1.9rem; line-height: 1.35; margin: 8px 0 18px; letter-spacing: -.02em; }
+  .cover-img { width: 100%; border-radius: var(--radius); margin: 4px 0 18px; }
+  .logo-img { max-height: 120px; max-width: 280px; background: #fff; padding: 10px; border: 1px solid var(--line); border-radius: var(--radius); margin: 4px 0 12px; }
+  .prose img { max-width: 100%; border-radius: 10px; } .prose p { margin: 0 0 1em; }
+  table.info { width: 100%; border-collapse: collapse; margin: 22px 0; background: var(--surface); border-radius: var(--radius); overflow: hidden; }
+  .info th, .info td { text-align: left; padding: 12px 16px; border-bottom: 1px solid var(--line); vertical-align: top; }
+  .info tr:last-child th, .info tr:last-child td { border-bottom: 0; } .info th { width: 100px; color: var(--muted); font-weight: 600; white-space: nowrap; }
+  .back { display: inline-block; margin-top: 12px; font-weight: 600; }
+  footer { margin-top: 72px; border-top: 1px solid var(--line); background: var(--surface); color: var(--muted); font-size: .9rem; }
+  .foot { display: flex; gap: 8px 24px; flex-wrap: wrap; padding-top: 28px; padding-bottom: 28px; } .foot strong { color: var(--brand); }
+  @media (max-width: 560px) { nav a { margin-left: 14px; } .hero .wrap { padding-top: 48px; padding-bottom: 48px; } }
+</style>
