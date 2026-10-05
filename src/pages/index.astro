@@ -8,14 +8,17 @@ import news from '../data/news.json';
 const latest = [...news].sort((a, b) => b.date.localeCompare(a.date)).slice(0, 3);
 ---
 <Base>
-  <section class="hero">
-    <div class="wrap">
-      <h1>{site.tagline}</h1>
-      <p>{site.description}</p>
-      <div class="btns">
-        <a class="btn primary" href="/vendors/">벤더 소개 보기</a>
-        <a class="btn ghost" href="/news/">최신 뉴스</a>
+  <section class="hero" style="--hero-bg: url('/assets/uploads/2025/03/home-hero-bg.jpg')">
+    <div class="wrap hero-grid">
+      <div>
+        <h1>{site.tagline}</h1>
+        <p>{site.description}</p>
+        <div class="btns">
+          <a class="btn primary" href="/vendors/">벤더 소개 보기</a>
+          <a class="btn ghost" href="/news/">최신 뉴스</a>
+        </div>
       </div>
+      <img class="poster" src="/assets/uploads/2026/08/beauty.jpg" alt="Canada Beauty Connect 2026" width="360" />
     </div>
   </section>
   <div class="wrap">

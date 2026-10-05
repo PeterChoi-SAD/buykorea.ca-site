@@ -65,7 +65,9 @@ const nav = [['/news/', '뉴스'], ['/vendors/', '벤더 소개'], ['/about/', '
   nav a { margin-left: 22px; color: var(--fg); font-weight: 600; font-size: .95rem; padding: 6px 0; border-bottom: 2px solid transparent; }
   nav a:hover { text-decoration: none; color: var(--accent); }
   nav a.on { border-color: var(--accent); }
-  .hero { background: linear-gradient(135deg, #0b2a5b 0%, #1b4fa8 60%, #c8102e 140%); color: #fff; }
+  .hero { background: linear-gradient(135deg, rgba(11,42,91,.92) 0%, rgba(27,79,168,.85) 60%, rgba(200,16,46,.7) 140%), var(--hero-bg, none) center/cover; color: #fff; }
+  .hero-grid { display: grid; grid-template-columns: 1fr auto; gap: 40px; align-items: center; }
+  .poster { width: 300px; max-width: 100%; height: auto; border-radius: var(--radius); box-shadow: 0 12px 40px rgba(0,0,0,.35); transform: rotate(2deg); }
   .hero .wrap { padding-top: 72px; padding-bottom: 72px; }
   .hero h1 { margin: 0 0 12px; font-size: clamp(1.8rem, 4.5vw, 2.8rem); line-height: 1.25; letter-spacing: -.03em; }
   .hero p { margin: 0 0 24px; max-width: 560px; opacity: .88; font-size: 1.05rem; }
@@ -101,5 +103,6 @@ const nav = [['/news/', '뉴스'], ['/vendors/', '벤더 소개'], ['/about/', '
   .back { display: inline-block; margin-top: 12px; font-weight: 600; }
   footer { margin-top: 72px; border-top: 1px solid var(--line); background: var(--surface); color: var(--muted); font-size: .9rem; }
   .foot { display: flex; gap: 8px 24px; flex-wrap: wrap; padding-top: 28px; padding-bottom: 28px; } .foot strong { color: var(--brand); }
+  @media (max-width: 760px) { .hero-grid { grid-template-columns: 1fr; } .poster { width: 240px; transform: none; } }
   @media (max-width: 560px) { nav a { margin-left: 14px; } .hero .wrap { padding-top: 48px; padding-bottom: 48px; } }
 </style>
