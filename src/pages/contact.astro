@@ -1,0 +1,35 @@
+---
+import Base from '../layouts/Base.astro';
+import site from '../data/site.json';
+import team from '../data/team.json';
+const map = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(site.address)}`;
+---
+<Base title="문의" description={`${site.name} 문의 - 전화, 이메일, 위치 및 담당자 안내`}>
+  <div class="wrap">
+    <h1 class="page">Let’s Connect</h1>
+    <p class="meta" style="margin-bottom:22px">캐나다 진출·수출 상담은 아래 연락처로 문의해 주세요.</p>
+    <div class="grid contact-grid">
+      <div class="card info-card"><span class="tag">Phone</span><h3><a href={`tel:${site.phone.replace(/[^0-9+]/g, '')}`}>{site.phone}</a></h3></div>
+      <div class="card info-card"><span class="tag">Email</span><h3><a href={`mailto:${site.contact_email}`}>{site.contact_email}</a></h3></div>
+      <div class="card info-card"><span class="tag">Address</span><h3><a href={map} target="_blank" rel="noopener">{site.address}</a></h3></div>
+    </div>
+    <p style="margin-top:22px"><a class="btn mail" href={`mailto:${site.contact_email}?subject=${encodeURIComponent('[BuyKorea.ca] 문의')}`}>이메일로 문의하기</a></p>
+    <section class="block">
+      <div class="head"><h2>담당자</h2></div>
+      <div class="grid">
+        {team.map((m) => (
+          <div class="card person"><p class="pn">{m.name}</p><p class="meta">{m.title}</p><a href={`mailto:${m.email}`}>✉ {m.email}</a></div>
+        ))}
+      </div>
+    </section>
+  </div>
+</Base>
+
+<style>
+  .info-card, .person { padding: 18px 20px; border-left: 4px solid var(--link); }
+  .info-card h3 { margin: 10px 0 0; font-size: 1.1rem; }
+  .pn { margin: 0; font-weight: 700; font-size: 1.08rem; }
+  .person .meta { margin: 2px 0 10px; }
+  .btn.mail { background: var(--brand); color: #fff; }
+  @media (prefers-color-scheme: dark) { .btn.mail { color: #0d1220; } }
+</style>

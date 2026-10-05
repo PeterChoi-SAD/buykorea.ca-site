@@ -4,7 +4,7 @@ const { title, description = site.description, image, canonical } = Astro.props;
 const url = canonical ?? new URL(Astro.url.pathname, Astro.site).href;
 const full = title ? `${title} | ${site.name}` : `${site.name} - ${site.tagline}`;
 const path = Astro.url.pathname;
-const nav = [['/news/', '뉴스'], ['/vendors/', '벤더 소개'], ['/about/', '소개']];
+const nav = [['/news/', '뉴스'], ['/vendors/', '벤더 소개'], ['/about/', '소개'], ['/contact/', '문의']];
 ---
 <!doctype html>
 <html lang="ko">
@@ -34,6 +34,7 @@ const nav = [['/news/', '뉴스'], ['/vendors/', '벤더 소개'], ['/about/', '
       <div class="wrap foot">
         <strong>{site.name}</strong>
         <span>{site.tagline}</span>
+        <span><a href={`mailto:${site.contact_email}`}>{site.contact_email}</a> · {site.phone}</span>
         <span>© {new Date().getFullYear()} {site.company}</span>
       </div>
     </footer>
@@ -89,7 +90,7 @@ const nav = [['/news/', '뉴스'], ['/vendors/', '벤더 소개'], ['/about/', '
   .card .th img { max-width: 100%; max-height: 100%; object-fit: contain; }
   .card .cb { padding: 14px 16px 18px; } .card h3 { margin: 6px 0 4px; font-size: 1.02rem; line-height: 1.45; letter-spacing: -.01em; }
   .meta { color: var(--muted); font-size: .86rem; margin: 0; }
-  .tag { display: inline-block; font-size: .74rem; font-weight: 700; background: color-mix(in srgb, var(--brand) 10%, transparent);
+  .tag { align-self: flex-start; display: inline-block; font-size: .74rem; font-weight: 700; background: color-mix(in srgb, var(--brand) 10%, transparent);
     color: var(--brand); border-radius: 999px; padding: 1px 10px; }
   .chips { display: flex; gap: 8px; flex-wrap: wrap; margin: 8px 0 24px; }
   article.doc { max-width: 740px; margin: 0 auto; padding: 40px 0 24px; }

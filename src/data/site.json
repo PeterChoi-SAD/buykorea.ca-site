@@ -1,1 +1,10 @@
-{"name":"BuyKorea.ca","tagline":"캐나다 진출을 위한 한국 기업 정보 · 뉴스","company":"MDC Technology","description":"캐나다 시장에 진출하는 한국 기업(벤더) 소개와 수출 관련 뉴스를 전합니다.","domain":"buykorea.ca","contact_email":""}
+{
+ "name": "BuyKorea.ca",
+ "tagline": "캐나다 진출을 위한 한국 기업 정보 · 뉴스",
+ "company": "MDC Technology",
+ "description": "캐나다 시장에 진출하는 한국 기업(벤더) 소개와 수출 관련 뉴스를 전합니다.",
+ "domain": "buykorea.ca",
+ "contact_email": "info@buykorea.ca",
+ "phone": "604-283-3445",
+ "address": "9912 Lougheed Hwy, Burnaby, BC"
+}
