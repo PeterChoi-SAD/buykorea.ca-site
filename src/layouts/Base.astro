@@ -77,8 +77,9 @@ const nav = [['/news/', '뉴스'], ['/vendors/', '벤더 소개'], ['/export-sup
   nav a.cta { background: var(--ink); color: var(--bg); margin-left: 10px; padding: 9px 20px; }
   nav a.cta:hover { background: var(--deep); color: #fff; }
 
-  .hero { color: #fff; background: linear-gradient(100deg, rgba(5,32,60,.96) 0%, rgba(8,70,120,.86) 55%, rgba(56,182,255,.55) 130%), var(--hero-bg, none) center/cover; }
+  .hero { color: #fff; background: linear-gradient(100deg, rgba(5,32,60,.78) 0%, rgba(8,70,120,.5) 55%, rgba(56,182,255,.2) 120%), var(--hero-bg, none) center/cover; }
   .hero-grid { display: grid; grid-template-columns: 1.2fr .8fr; gap: 56px; align-items: center; padding-top: 104px; padding-bottom: 104px; }
+  .hero h1, .hero p, .pbanner h1, .pbanner p { text-shadow: 0 2px 14px rgba(3,20,40,.45); }
   .hero h1 { margin: 0 0 20px; font-size: clamp(2rem, 4.6vw, 3.4rem); line-height: 1.22; letter-spacing: -.03em; font-weight: 600; }
   .hero p { margin: 0 0 32px; max-width: 520px; color: rgba(255,255,255,.82); font-size: 1.08rem; }
   .btns { display: flex; gap: 12px; flex-wrap: wrap; }
@@ -89,7 +90,7 @@ const nav = [['/news/', '뉴스'], ['/vendors/', '벤더 소개'], ['/export-sup
   .btn.solid { background: var(--ink); color: var(--bg); } .btn.solid:hover { background: var(--deep); color: #fff; }
   .poster { width: 320px; max-width: 100%; height: auto; justify-self: end; border-radius: var(--radius); box-shadow: 0 30px 60px -20px rgba(0,0,0,.5); }
 
-  .pbanner { background: linear-gradient(100deg, rgba(5,32,60,.9) 0%, rgba(8,70,120,.6) 60%, rgba(8,70,120,.25) 100%), var(--bn) center/cover; color: #fff; }
+  .pbanner { background: linear-gradient(100deg, rgba(5,32,60,.68) 0%, rgba(8,70,120,.34) 60%, rgba(8,70,120,.08) 100%), var(--bn) center/cover; color: #fff; }
   .pbanner .wrap { padding-top: 88px; padding-bottom: 88px; }
   .pbanner h1 { margin: 0; font-size: clamp(2rem, 4.5vw, 3rem); }
   .pbanner p { margin: 10px 0 0; color: rgba(255,255,255,.85); font-size: 1.08rem; }
