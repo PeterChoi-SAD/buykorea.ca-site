@@ -4,33 +4,39 @@ import PageBanner from '../components/PageBanner.astro';
 import site from '../data/site.json';
 import team from '../data/team.json';
 const map = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(site.address)}`;
+const rows = [
+  ['전화', site.phone, `tel:${site.phone.replace(/[^0-9+]/g, '')}`],
+  ['이메일', site.contact_email, `mailto:${site.contact_email}?subject=${encodeURIComponent('[BuyKorea.ca] 문의')}`],
+  ['주소', site.address, map],
+];
 ---
 <Base title="문의" description={`${site.name} 문의 - 전화, 이메일, 위치 및 담당자 안내`}>
   <PageBanner title="Let’s Connect" sub="캐나다 진출·수출 상담은 아래 연락처로 문의해 주세요." image="/assets/banners/contact.jpg" />
   <div class="wrap">
-    <div style="height:32px"></div>
-    <div class="grid contact-grid">
-      <div class="card info-card"><span class="tag">Phone</span><h3><a href={`tel:${site.phone.replace(/[^0-9+]/g, '')}`}>{site.phone}</a></h3></div>
-      <div class="card info-card"><span class="tag">Email</span><h3><a href={`mailto:${site.contact_email}`}>{site.contact_email}</a></h3></div>
-      <div class="card info-card"><span class="tag">Address</span><h3><a href={map} target="_blank" rel="noopener">{site.address}</a></h3></div>
-    </div>
-    <p style="margin-top:22px"><a class="btn mail" href={`mailto:${site.contact_email}?subject=${encodeURIComponent('[BuyKorea.ca] 문의')}`}>이메일로 문의하기</a></p>
+    <section class="block">
+      <div class="cl">
+        {rows.map(([k, v, href]) => (
+          <a class="crow" href={href} target={k === '주소' ? '_blank' : undefined} rel={k === '주소' ? 'noopener' : undefined}><span>{k}</span><strong>{v}</strong></a>
+        ))}
+      </div>
+    </section>
     <section class="block">
       <div class="head"><h2>담당자</h2></div>
-      <div class="grid">
+      <div class="cols">
         {team.map((m) => (
-          <div class="card person"><p class="pn">{m.name}</p><p class="meta">{m.title}</p><a href={`mailto:${m.email}`}>✉ {m.email}</a></div>
+          <div class="col"><h3>{m.name}</h3><p>{m.title}</p><a class="mail" href={`mailto:${m.email}`}>{m.email}</a></div>
         ))}
       </div>
     </section>
   </div>
 </Base>
-
 <style>
-  .info-card, .person { padding: 18px 20px; border-left: 4px solid var(--link); }
-  .info-card h3 { margin: 10px 0 0; font-size: 1.1rem; }
-  .pn { margin: 0; font-weight: 700; font-size: 1.08rem; }
-  .person .meta { margin: 2px 0 10px; }
-  .btn.mail { background: var(--brand); color: #fff; }
-  @media (prefers-color-scheme: dark) { .btn.mail { color: #0d1220; } }
+  .cl { border-top: 1px solid var(--ink); }
+  .crow { display: grid; grid-template-columns: 140px 1fr; gap: 16px; align-items: baseline; padding: 26px 0; border-bottom: 1px solid var(--line); color: var(--ink); transition: padding .2s; }
+  .crow:hover { text-decoration: none; padding-left: 10px; }
+  .crow span { color: var(--muted); font-size: .95rem; }
+  .crow strong { font: 600 clamp(1.25rem, 3vw, 1.9rem)/1.3 var(--display); letter-spacing: -.02em; }
+  .crow:hover strong { color: var(--deep); }
+  .mail { display: inline-block; margin-top: 10px; }
+  @media (max-width: 560px) { .crow { grid-template-columns: 1fr; gap: 4px; } }
 </style>

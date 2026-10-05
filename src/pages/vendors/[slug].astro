@@ -19,11 +19,11 @@ const rows = [
       <h1>{v.name}</h1>
       {v.image && <img class="logo-img" src={src(v.image)} alt={v.name} />}
       {v.description && <div class="prose" set:html={toHtml(v.description)} />}
-      <table class="info">
+      <dl class="rows">
         {rows.map(([k, x]) => (
-          <tr><th>{k}</th><td>{typeof x === 'object' ? <a href={x.href} rel="noopener" target={x.ext ? '_blank' : undefined}>{x.text}</a> : x}</td></tr>
+          <div><dt>{k}</dt><dd>{typeof x === 'object' ? <a href={x.href} rel="noopener" target={x.ext ? '_blank' : undefined}>{x.text}</a> : x}</dd></div>
         ))}
-      </table>
+      </dl>
       <a class="back" href="/vendors/">← 벤더 목록</a>
     </article>
   </div>

@@ -8,7 +8,7 @@ const cats = [...new Set(vendors.map((v) => v.category).filter(Boolean))];
 <Base title="벤더 소개" description="캐나다 시장에 진출하는 한국 벤더 소개">
   <PageBanner title="벤더 소개" sub="캐나다 시장에 진출하는 한국 벤더" image="/assets/banners/vendors.jpg" />
   <div class="wrap">
-    <div class="chips" style="margin-top:28px">{cats.map((c) => <span class="tag">{c}</span>)}</div>
+    <div class="chips" style="margin-top:44px">{cats.map((c) => <span class="tag">{c}</span>)}</div>
     <div class="grid">{vendors.map((v) => <VendorCard v={v} />)}</div>
   </div>
 </Base>

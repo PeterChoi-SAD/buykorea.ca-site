@@ -13,12 +13,11 @@ const items = [
 <Base title="수출지원" description="한국 기업의 캐나다 진출을 위한 시장조사, 바이어 컨택, 통관, 온라인 판매, 마케팅, 지사 운영 지원">
   <PageBanner title="수출지원" sub="Export Support" image="/assets/banners/export.jpg" />
   <div class="wrap">
-    <div class="grid" style="margin-top:36px">
-      {items.map(([t, d], i) => (
-        <div class="card svc"><span class="tag">0{i + 1}</span><h3>{t}</h3><p class="meta">{d}</p></div>
-      ))}
-    </div>
-    <p style="margin-top:26px"><a class="more" href="/contact/">상담 문의하기 →</a></p>
+    <section class="block">
+      <div class="cols">
+        {items.map(([t, d]) => (<div class="col"><h3>{t}</h3><p>{d}</p></div>))}
+      </div>
+      <p style="margin-top:48px"><a class="btn solid" href="/contact/">상담 문의하기</a></p>
+    </section>
   </div>
 </Base>
-<style>.svc { padding: 18px 20px; border-left: 4px solid var(--accent); } .svc h3 { margin: 10px 0 6px; font-size: 1.1rem; }</style>

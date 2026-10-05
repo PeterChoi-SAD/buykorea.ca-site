@@ -22,41 +22,37 @@ const steps = [['시장조사', '진출 가능성과 경쟁 환경을 확인합�
 
     <section class="block" style="padding-top:8px">
       <div class="head"><h2>제공 서비스</h2></div>
-      <div class="grid two">
+      <div class="cols two">
         {services.map(([t, d, list]) => (
-          <div class="card svc"><h3>{t}</h3><p class="meta" style="margin-bottom:10px">{d}</p><ul>{list.map((x) => <li>{x}</li>)}</ul></div>
+          <div class="col"><h3>{t}</h3><p>{d}</p><ul>{list.map((x) => <li>{x}</li>)}</ul></div>
         ))}
       </div>
     </section>
 
     <section class="block">
       <div class="head"><h2>진행 과정</h2></div>
-      <div class="grid steps">
-        {steps.map(([t, d], i) => (<div class="card step"><span class="tag">STEP {i + 1}</span><h3>{t}</h3><p class="meta">{d}</p></div>))}
+      <div class="cols steps">
+        {steps.map(([t, d], i) => (<div class="col step"><span class="num">{i + 1}</span><h3>{t}</h3><p>{d}</p></div>))}
       </div>
     </section>
 
     <section class="block">
       <div class="head"><h2>왜 {site.name}인가</h2></div>
-      <div class="grid">
-        <div class="card svc"><h3>현지 전문성</h3><p class="meta">캐나다 현지 법인으로서 법규와 시장 트렌드를 실시간으로 반영합니다.</p></div>
-        <div class="card svc"><h3>통합 솔루션</h3><p class="meta">통관, 물류, 마케팅까지 한 곳에서 해결하는 원스톱 서비스입니다.</p></div>
-        <div class="card svc"><h3>컨설팅</h3><p class="meta">캐나다 지사 설립과 현지 법인 운영에 대한 자문도 가능합니다.</p></div>
+      <div class="cols">
+        <div class="col"><h3>현지 전문성</h3><p>캐나다 현지 법인으로서 법규와 시장 트렌드를 실시간으로 반영합니다.</p></div>
+        <div class="col"><h3>통합 솔루션</h3><p>통관, 물류, 마케팅까지 한 곳에서 해결하는 원스톱 서비스입니다.</p></div>
+        <div class="col"><h3>컨설팅</h3><p>캐나다 지사 설립과 현지 법인 운영에 대한 자문도 가능합니다.</p></div>
       </div>
     </section>
 
-    <p style="margin-top:32px"><a class="btn mail" href="/contact/">상담 문의하기</a></p>
+    <p style="margin-top:32px"><a class="btn solid" href="/contact/">상담 문의하기</a></p>
     {site.contact_email && <p class="meta" style="margin-top:12px">이메일 <a href={`mailto:${site.contact_email}`}>{site.contact_email}</a> · 전화 {site.phone}</p>}
   </div>
 </Base>
 
 <style>
-  .grid.steps { grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); }
-  .grid.two { grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); }
-  .svc, .step { padding: 20px 22px; border-left: 4px solid var(--accent); }
-  .svc h3, .step h3 { margin: 4px 0 8px; font-size: 1.12rem; }
-  .step h3 { margin-top: 10px; }
-  .svc ul { margin: 0; padding-left: 20px; color: var(--fg); font-size: .95rem; }
-  .btn.mail { background: var(--brand); color: #fff; }
-  @media (prefers-color-scheme: dark) { .btn.mail { color: #0d1220; } }
+  .cols.two { grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); }
+  .cols.steps { grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); }
+  .step .num { display: block; font: 600 2.4rem/1 var(--display); color: var(--sky); margin-bottom: 14px; }
+  @media (max-width: 480px) { .cols.two { grid-template-columns: 1fr; } }
 </style>

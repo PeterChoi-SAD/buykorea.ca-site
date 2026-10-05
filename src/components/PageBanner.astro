@@ -7,10 +7,3 @@ const { title, sub, image } = Astro.props;
     {sub && <p>{sub}</p>}
   </div>
 </section>
-<style>
-  .pbanner { background: linear-gradient(180deg, rgba(11,42,91,.55), rgba(11,42,91,.78)), var(--bn) center/cover; color: #fff; }
-  .pbanner .wrap { padding-top: 76px; padding-bottom: 76px; }
-  .pbanner h1 { margin: 0; font-size: clamp(1.9rem, 4.5vw, 2.7rem); letter-spacing: -.03em; text-shadow: 0 2px 12px rgba(0,0,0,.35); }
-  .pbanner p { margin: 8px 0 0; opacity: .9; font-size: 1.05rem; }
-  @media (max-width: 560px) { .pbanner .wrap { padding-top: 48px; padding-bottom: 48px; } }
-</style>

@@ -8,7 +8,7 @@ const list = [...news].sort((a, b) => b.date.localeCompare(a.date));
 <Base title="뉴스" description="캐나다 진출 한국 기업 관련 최신 뉴스">
   <PageBanner title="뉴스" sub="회사 소식" image="/assets/banners/news.jpg" />
   <div class="wrap">
-    <p class="meta" style="margin:28px 0 22px">총 {list.length}건</p>
+    <p class="meta" style="margin:40px 0 24px">총 {list.length}건</p>
     <div class="grid">{list.map((n) => <NewsCard n={n} />)}</div>
   </div>
 </Base>
