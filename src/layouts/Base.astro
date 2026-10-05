@@ -133,6 +133,10 @@ const nav = [['/news/', '뉴스'], ['/vendors/', '벤더 소개'], ['/export-sup
   .foot p { margin: 0 0 4px; color: var(--muted); } .flogo { display: block; height: 30px; width: auto; margin-bottom: 12px; }
   .foot .copy { grid-column: 1 / -1; padding-top: 24px; border-top: 1px solid var(--line); font-size: .85rem; }
   @media (max-width: 760px) {
+    .hero { background: linear-gradient(180deg, rgba(5,32,60,.55) 0%, rgba(8,70,120,.3) 60%, rgba(8,70,120,.15) 100%), var(--hero-bg, none) center/cover; }
+    .pbanner { background: linear-gradient(180deg, rgba(5,32,60,.5) 0%, rgba(8,70,120,.22) 100%), var(--bn) center/cover; }
+  }
+  @media (max-width: 760px) {
     .hero-grid { grid-template-columns: 1fr; gap: 36px; padding-top: 64px; padding-bottom: 64px; } .poster { width: 240px; justify-self: start; }
     .bar { height: 64px; } nav a { padding: 7px 10px; font-size: .88rem; } nav a.cta { margin-left: 4px; padding: 7px 14px; }
     .pbanner .wrap { padding-top: 56px; padding-bottom: 56px; } section.block { padding-top: 52px; } .foot { grid-template-columns: 1fr; }
