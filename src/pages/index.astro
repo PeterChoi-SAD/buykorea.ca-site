@@ -23,6 +23,14 @@ const latest = [...news].sort((a, b) => b.date.localeCompare(a.date)).slice(0, 3
   </section>
   <div class="wrap">
     <section class="block">
+      <div class="head"><h2>원스톱 캐나다 수출 컨설팅</h2><a class="more" href="/about/">자세히 보기 →</a></div>
+      <div class="grid">
+        <a class="card pitch" href="/about/"><span class="tag">Marketing</span><h3>캐나다 마케팅</h3><p class="meta">현지 시장에 맞춘 브랜드 소개, 온라인 판매, 홍보 캠페인</p></a>
+        <a class="card pitch" href="/about/"><span class="tag">Import</span><h3>수입대행</h3><p class="meta">수입 규정 확인, 통관·물류, 바이어 연결까지 대행</p></a>
+        <a class="card pitch" href="/export-support/"><span class="tag">Support</span><h3>수출지원</h3><p class="meta">시장조사부터 지사 운영 자문까지 단계별 지원</p></a>
+      </div>
+    </section>
+    <section class="block">
       <div class="head"><h2>최신 뉴스</h2><a class="more" href="/news/">전체 보기 →</a></div>
       <div class="grid">{latest.map((n) => <NewsCard n={n} />)}</div>
     </section>
@@ -32,3 +40,5 @@ const latest = [...news].sort((a, b) => b.date.localeCompare(a.date)).slice(0, 3
     </section>
   </div>
 </Base>
+
+<style>.pitch { padding: 20px 22px; border-left: 4px solid var(--accent); } .pitch h3 { margin: 10px 0 6px; font-size: 1.12rem; }</style>

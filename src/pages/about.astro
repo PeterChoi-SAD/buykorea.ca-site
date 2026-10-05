@@ -1,15 +1,62 @@
 ---
 import Base from '../layouts/Base.astro';
+import PageBanner from '../components/PageBanner.astro';
 import site from '../data/site.json';
+const services = [
+  ['캐나다 마케팅', '제품 포지셔닝부터 현지 소비자 대상 홍보까지, 캐나다 시장에 맞춘 마케팅을 기획하고 실행합니다.',
+    ['현지 시장·경쟁 제품 조사', '브랜드·제품 소개 자료 현지화', '온라인 판매 채널 운영과 마케팅 캠페인', '박람회·팝업·판촉 행사 연계']],
+  ['수입대행', '캐나다에서 필요한 수입 절차를 대신 진행해, 한국 기업이 현지 법인 없이도 판매를 시작할 수 있도록 돕습니다.',
+    ['수입 규정·라벨링 확인', '통관 및 물류 연계', '소량 판매를 통한 시장 반응 테스트', '현지 바이어 연결과 계약 지원']],
+];
+const steps = [['시장조사', '진출 가능성과 경쟁 환경을 확인합니다.'], ['준비', '규정·라벨링 등 수입 요건을 점검합니다.'], ['수입·통관', '수입대행과 물류를 진행합니다.'], ['판매·마케팅', '바이어 연결과 현지 마케팅을 실행합니다.']];
 ---
-<Base title="소개">
+<Base title="소개" description="한국 기업의 캐나다 수출을 돕는 원스톱 컨설팅 - 캐나다 마케팅과 수입대행">
+  <PageBanner title="소개" sub="한국에서 캐나다까지, 수출을 한 번에" image="/assets/banners/about.jpg" />
   <div class="wrap">
-    <article class="doc">
-      <h1>소개</h1>
+    <article class="doc" style="max-width:780px">
       <div class="prose">
-        <p>{site.name}는 {site.company}가 운영하는 정보 사이트로, 캐나다 시장 진출을 준비하는 한국 기업(벤더)과 관련 뉴스를 소개합니다.</p>
-        {site.contact_email && <p>문의: <a href={`mailto:${site.contact_email}`}>{site.contact_email}</a></p>}
+        <p><strong>{site.name}</strong>는 한국 기업의 캐나다 수출을 돕는 <strong>원스톱 컨설팅 회사</strong>입니다. 캐나다 현지 법인으로서 현지 법규와 시장 흐름을 반영하고, 단순 중개를 넘어 <strong>마케팅과 수입대행</strong>까지 한 곳에서 해결합니다.</p>
+        <p>한국 제품을 캐나다에 소개하려는 기업(Inbound), 캐나다의 좋은 자원을 한국으로 들여가려는 바이어(Outbound) 모두 상담하실 수 있습니다.</p>
       </div>
     </article>
+
+    <section class="block" style="padding-top:8px">
+      <div class="head"><h2>제공 서비스</h2></div>
+      <div class="grid two">
+        {services.map(([t, d, list]) => (
+          <div class="card svc"><h3>{t}</h3><p class="meta" style="margin-bottom:10px">{d}</p><ul>{list.map((x) => <li>{x}</li>)}</ul></div>
+        ))}
+      </div>
+    </section>
+
+    <section class="block">
+      <div class="head"><h2>진행 과정</h2></div>
+      <div class="grid steps">
+        {steps.map(([t, d], i) => (<div class="card step"><span class="tag">STEP {i + 1}</span><h3>{t}</h3><p class="meta">{d}</p></div>))}
+      </div>
+    </section>
+
+    <section class="block">
+      <div class="head"><h2>왜 {site.name}인가</h2></div>
+      <div class="grid">
+        <div class="card svc"><h3>현지 전문성</h3><p class="meta">캐나다 현지 법인으로서 법규와 시장 트렌드를 실시간으로 반영합니다.</p></div>
+        <div class="card svc"><h3>통합 솔루션</h3><p class="meta">통관, 물류, 마케팅까지 한 곳에서 해결하는 원스톱 서비스입니다.</p></div>
+        <div class="card svc"><h3>컨설팅</h3><p class="meta">캐나다 지사 설립과 현지 법인 운영에 대한 자문도 가능합니다.</p></div>
+      </div>
+    </section>
+
+    <p style="margin-top:32px"><a class="btn mail" href="/contact/">상담 문의하기</a></p>
+    {site.contact_email && <p class="meta" style="margin-top:12px">이메일 <a href={`mailto:${site.contact_email}`}>{site.contact_email}</a> · 전화 {site.phone}</p>}
   </div>
 </Base>
+
+<style>
+  .grid.steps { grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); }
+  .grid.two { grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); }
+  .svc, .step { padding: 20px 22px; border-left: 4px solid var(--accent); }
+  .svc h3, .step h3 { margin: 4px 0 8px; font-size: 1.12rem; }
+  .step h3 { margin-top: 10px; }
+  .svc ul { margin: 0; padding-left: 20px; color: var(--fg); font-size: .95rem; }
+  .btn.mail { background: var(--brand); color: #fff; }
+  @media (prefers-color-scheme: dark) { .btn.mail { color: #0d1220; } }
+</style>
