@@ -14,6 +14,27 @@ const deal = [
   ['픽업', 'Anvely, 코퀴틀람 한인타운 · 평일 오전 10시 ~ 오후 6시'],
   ['결제', `e-Transfer (${site.contact_email}) 또는 픽업 시 카드 결제`],
 ];
+const A = '/assets/group-buy/';
+const videos = [
+  ['intro', '제품 소개 영상', '2분'],
+  ['chicken', '닭도리탕', '43초'],
+  ['jeyuk', '제육볶음', '1분 4초'],
+  ['mackerel', '고등어조림', '54초'],
+  ['pollack', '동태탕', '1분 9초'],
+];
+const points = [
+  ['물만 부으면 완성', '양념 1조각을 물에 5~10분 불려 채소와 버무리면 끝. 김치 담그기가 훨씬 간단해집니다.'],
+  ['김치부터 찌개·조림·볶음까지', '배추김치, 깍두기, 쪽파김치는 물론 제육볶음, 닭도리탕, 고등어조림, 동태탕, 김치찌개에도 쓸 수 있어요.'],
+  ['상온 보관 블록형', '냉장 공간 없이 보관하고, 필요한 만큼 조각으로 덜어 씁니다.'],
+  ['제조사 안내', '22가지 이상 국산 재료, 유기농 고춧가루 100%, 무MSG·무방부제, HACCP 인증 (모두 제조사 자료 기준)'],
+];
+const recipes = [
+  ['배추김치', '양념 1조각 + 물 종이컵 반 컵을 5~10분 불려 절인 배추 600g과 버무립니다.'],
+  ['깍두기', '양념 1조각을 불려 소금에 절인 무 1kg과 버무립니다.'],
+  ['제육볶음', '양념 1.5조각 + 물 100ml를 불린 뒤, 고기 300g, 물 75ml와 함께 볶다가 약불로 졸입니다.'],
+  ['닭도리탕', '닭 1마리에 양념 1.5조각, 물 500ml. 센 불에서 끓이다 약불로 졸입니다.'],
+  ['김치찌개', '돼지고기 300g, 김치 100g에 양념 1조각, 물 600ml. 센 불에서 끓이다 중불로 줄입니다.'],
+];
 const steps = [
   ['주문서 작성', '아래 주문하기 버튼으로 이름, 연락처, 수량을 남겨 주세요.'],
   ['결제', 'e-Transfer로 입금하고 메모에 이름과 연락처 뒷 4자리를 적어 주세요. 픽업 시 카드 결제도 가능합니다.'],
@@ -27,6 +48,7 @@ const steps = [
     <section class="block">
       <div class="head"><h2>진행 중인 공구</h2></div>
       <div class="gb">
+        <img class="pimg" src={A + 'product.jpg'} alt="원그대로 김치양념 100g 포장" width="750" height="1000" />
         <div>
           <h3>원그대로 김치양념 100g</h3>
           <p class="lead">물만 부으면 약 3분, 전통 김치 맛 양념. 김치뿐 아니라 찌개·조림·볶음 양념으로도 쓸 수 있어요.</p>
@@ -40,6 +62,39 @@ const steps = [
           <p class="note">※ 1인 최소 2개 이상 주문할 수 있습니다. 제품 정보는 제조사 발표 기준이며, 유통기한과 성분 표기는 입고 시 안내합니다.</p>
         </div>
       </div>
+    </section>
+
+    <section class="block">
+      <div class="head"><h2>제품 소개</h2></div>
+      <div class="cols">
+        {points.map(([t, d]) => (<div class="col"><h3>{t}</h3><p>{d}</p></div>))}
+      </div>
+      <img class="wide" src={A + 'lifestyle.jpg'} alt="원그대로 김치양념으로 요리한 모습" loading="lazy" />
+    </section>
+
+    <section class="block">
+      <div class="head"><h2>영상으로 보기</h2></div>
+      <div class="vids">
+        {videos.map(([id, t, len]) => (
+          <figure>
+            <video controls preload="none" playsinline poster={`${A}${id}.jpg`} src={`${A}${id}.mp4`}></video>
+            <figcaption>{t} <span>{len}</span></figcaption>
+          </figure>
+        ))}
+      </div>
+      <p class="note">영상 제공: (주)원그대로. 제조사 YouTube: <a href="https://youtu.be/giR9fabms3I" target="_blank" rel="noopener">기본 소개 영상</a> · <a href="https://youtu.be/fciXPxFiCV0" target="_blank" rel="noopener">English version</a></p>
+    </section>
+
+    <section class="block">
+      <div class="head"><h2>간단 레시피</h2></div>
+      <div class="cols">
+        {recipes.map(([t, d]) => (<div class="col"><h3>{t}</h3><p>{d}</p></div>))}
+      </div>
+      <div class="rb">
+        <img src={A + 'recipebook1.jpg'} alt="원그대로 레시피북 표지와 목차" loading="lazy" />
+        <img src={A + 'recipebook2.jpg'} alt="원그대로 레시피북 김치류·조림류·볶음류" loading="lazy" />
+      </div>
+      <p class="note">자료: 원그대로 레시피북. 입고 후 제품 수령 시 레시피북도 함께 안내해 드립니다.</p>
     </section>
 
     <section class="block">
@@ -58,6 +113,14 @@ const steps = [
 </Base>
 
 <style>
+  .gb { display: grid; grid-template-columns: minmax(220px, 340px) 1fr; gap: 40px; align-items: start; }
+  .pimg { width: 100%; height: auto; border-radius: var(--radius); border: 1px solid var(--line); }
+  .wide { width: 100%; max-width: 520px; height: auto; border-radius: var(--radius); margin-top: 32px; display: block; }
+  .vids { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 24px; }
+  .vids figure { margin: 0; } .vids video { width: 100%; aspect-ratio: 16 / 10; background: #000; border-radius: var(--radius); object-fit: contain; }
+  .vids figcaption { padding-top: 8px; font-weight: 500; } .vids figcaption span { color: var(--muted); font-weight: 400; font-size: .88rem; margin-left: 6px; }
+  .rb { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; margin-top: 32px; } .rb img { width: 100%; height: auto; border-radius: 12px; border: 1px solid var(--line); }
+  @media (max-width: 760px) { .gb { grid-template-columns: 1fr; gap: 24px; } .pimg { max-width: 300px; } }
   .gb h3 { margin: 0 0 8px; font-size: 1.5rem; }
   .lead { color: var(--muted); max-width: 640px; margin: 0; }
   .gb .btns { margin-top: 28px; }
