@@ -4,7 +4,7 @@ const { title, description = site.description, image, canonical } = Astro.props;
 const url = canonical ?? new URL(Astro.url.pathname, Astro.site).href;
 const full = title ? `${title} | ${site.name}` : `${site.name} - ${site.tagline}`;
 const path = Astro.url.pathname;
-const nav = [['/news/', '뉴스'], ['/vendors/', '벤더 소개'], ['/export-support/', '수출지원'], ['/about/', '소개']];
+const nav = [['/news/', '뉴스'], ['/vendors/', '벤더 소개'], ['/group-buy/', '공동구매'], ['/export-support/', '수출지원'], ['/about/', '소개']];
 ---
 <!doctype html>
 <html lang="ko">

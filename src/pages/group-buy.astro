@@ -1,0 +1,67 @@
+---
+import Base from '../layouts/Base.astro';
+import PageBanner from '../components/PageBanner.astro';
+import site from '../data/site.json';
+
+const formUrl = 'https://docs.google.com/forms/d/e/1FAIpQLSfrQU4bIqylf9cphuYtyJX5DElpAOvPLao_mAx_iQJRnhJHQQ/viewform';
+const groupUrl = 'https://www.facebook.com/groups/1746981863259629';
+
+const deal = [
+  ['상품', '원그대로 김치양념 100g (상온 보관)'],
+  ['가격', 'CAD $5 / 개'],
+  ['주문 조건', '1인 최소 2개 이상'],
+  ['마감', '10월 31일(토)까지'],
+  ['픽업', 'Anvely, 코퀴틀람 한인타운 · 평일 오전 10시 ~ 오후 6시'],
+  ['결제', `e-Transfer (${site.contact_email}) 또는 픽업 시 카드 결제`],
+];
+const steps = [
+  ['주문서 작성', '아래 주문하기 버튼으로 이름, 연락처, 수량을 남겨 주세요.'],
+  ['결제', 'e-Transfer로 입금하고 메모에 이름과 연락처 뒷 4자리를 적어 주세요. 픽업 시 카드 결제도 가능합니다.'],
+  ['입고 안내', '입고 후 개별로 연락드립니다.'],
+  ['픽업', '평일 오전 10시 ~ 오후 6시에 Anvely에서 받아 가세요.'],
+];
+---
+<Base title="공동구매" description="BuyKorea.ca 한국 벤더 제품 공동구매 - 원그대로 김치양념 100g, 10월 31일 마감">
+  <PageBanner title="공동구매" sub="Group Buy" image="/assets/banners/vendors.jpg" />
+  <div class="wrap">
+    <section class="block">
+      <div class="head"><h2>진행 중인 공구</h2></div>
+      <div class="gb">
+        <div>
+          <h3>원그대로 김치양념 100g</h3>
+          <p class="lead">물만 부으면 약 3분, 전통 김치 맛 양념. 김치뿐 아니라 찌개·조림·볶음 양념으로도 쓸 수 있어요.</p>
+          <dl class="rows">
+            {deal.map(([k, v]) => (<div><dt>{k}</dt><dd>{v}</dd></div>))}
+          </dl>
+          <div class="btns">
+            <a class="btn solid" href={formUrl} target="_blank" rel="noopener">주문하기</a>
+            <a class="btn line" href={groupUrl} target="_blank" rel="noopener">Facebook 그룹 참여</a>
+          </div>
+          <p class="note">※ 1인 최소 2개 이상 주문할 수 있습니다. 제품 정보는 제조사 발표 기준이며, 유통기한과 성분 표기는 입고 시 안내합니다.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="block">
+      <div class="head"><h2>참여 방법</h2></div>
+      <div class="cols">
+        {steps.map(([t, d], i) => (<div class="col"><h3>{i + 1}. {t}</h3><p>{d}</p></div>))}
+      </div>
+    </section>
+
+    <section class="block">
+      <div class="head"><h2>공동구매 소식 받기</h2></div>
+      <p class="lead">새 공구는 Facebook 그룹에 가장 먼저 올라옵니다. 그룹에 참여하시면 마감 전에 알림을 받으실 수 있어요.</p>
+      <p style="margin-top:24px"><a class="btn solid" href={groupUrl} target="_blank" rel="noopener">BuyKorea 공동구매 그룹 가기</a></p>
+    </section>
+  </div>
+</Base>
+
+<style>
+  .gb h3 { margin: 0 0 8px; font-size: 1.5rem; }
+  .lead { color: var(--muted); max-width: 640px; margin: 0; }
+  .gb .btns { margin-top: 28px; }
+  .btn.line { border: 1px solid var(--ink); color: var(--ink); }
+  .btn.line:hover { background: var(--mist); }
+  .note { margin-top: 20px; font-size: .88rem; color: var(--muted); max-width: 640px; }
+</style>
