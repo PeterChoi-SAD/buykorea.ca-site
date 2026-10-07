@@ -4,6 +4,7 @@ import PageBanner from '../components/PageBanner.astro';
 import site from '../data/site.json';
 
 const formUrl = 'https://docs.google.com/forms/d/e/1FAIpQLSfrQU4bIqylf9cphuYtyJX5DElpAOvPLao_mAx_iQJRnhJHQQ/viewform';
+const pageUrl = 'https://www.facebook.com/profile.php?id=61595062055325';
 const groupUrl = 'https://www.facebook.com/groups/1746981863259629';
 
 const deal = [
@@ -107,7 +108,7 @@ const steps = [
     <section class="block">
       <div class="head"><h2>공동구매 소식 받기</h2></div>
       <p class="lead">새 공구는 Facebook 그룹에 가장 먼저 올라옵니다. 그룹에 참여하시면 마감 전에 알림을 받으실 수 있어요.</p>
-      <p style="margin-top:24px"><a class="btn solid" href={groupUrl} target="_blank" rel="noopener">BuyKorea 공동구매 그룹 가기</a></p>
+      <p class="btns" style="margin-top:24px"><a class="btn solid" href={groupUrl} target="_blank" rel="noopener">BuyKorea 공동구매 그룹 가기</a> <a class="btn line" href={pageUrl} target="_blank" rel="noopener">Facebook 페이지 팔로우</a></p>
     </section>
   </div>
 </Base>
