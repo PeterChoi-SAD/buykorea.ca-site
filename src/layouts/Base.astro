@@ -4,7 +4,14 @@ const { title, description = site.description, image, canonical } = Astro.props;
 const url = canonical ?? new URL(Astro.url.pathname, Astro.site).href;
 const full = title ? `${title} | ${site.name}` : `${site.name} - ${site.tagline}`;
 const path = Astro.url.pathname;
-const nav = [['/news/', '뉴스'], ['/vendors/', '벤더 소개'], ['/group-buy/', '공동구매'], ['/export-support/', '수출지원'], ['/about/', '소개']];
+const groups = [
+  { href: '/news/', label: '뉴스' },
+  { href: '/vendors/', label: '벤더 소개' },
+  { href: '/group-buy/', label: '공동구매', sub: [['/group-buy/', '진행 중인 공구'], ['https://www.facebook.com/groups/1746981863259629', 'Facebook 그룹'], ['https://www.facebook.com/profile.php?id=61595062055325', 'Facebook 페이지']] },
+  { href: '/export-support/', label: '수출지원' },
+  { href: '/about/', label: '소개' },
+  { href: '/contact/', label: 'CONTACT', sub: [['/contact/', '문의하기']] },
+];
 ---
 <!doctype html>
 <html lang="ko">
@@ -26,12 +33,26 @@ const nav = [['/news/', '뉴스'], ['/vendors/', '벤더 소개'], ['/group-buy/
     <header class="top">
       <div class="wrap bar">
         <a class="brand" href="/" aria-label={site.name}><img src="/assets/logo.png" alt={site.name} height="34" /></a>
-        <nav>
-          {nav.map(([href, label]) => <a href={href} class:list={{ on: path.startsWith(href) }}>{label}</a>)}
-          <a class="cta" href="/contact/">문의하기</a>
-        </nav>
+        <button class="menu-btn" type="button" aria-expanded="false" aria-controls="drawer">MENU</button>
       </div>
     </header>
+    <div class="scrim" hidden></div>
+    <aside id="drawer" class="drawer" aria-label="메뉴" aria-hidden="true" inert>
+      <button class="x" type="button" aria-label="메뉴 닫기">&times;</button>
+      <div class="icons">
+        <a href="https://www.facebook.com/profile.php?id=61595062055325" target="_blank" rel="noopener" aria-label="Facebook"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M14 8h2.5V4.5H14a4 4 0 0 0-4 4V11H7.5v3.5H10V21h3.5v-6.5H16l.5-3.5h-3V8.8c0-.5.3-.8.8-.8z"/></svg></a>
+        <a href={`mailto:${site.contact_email}`} aria-label="Email"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3.5 7 8.5 6 8.5-6"/></svg></a>
+        <a href={`tel:${site.phone.replace(/[^0-9]/g, '')}`} aria-label="Phone"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6.5 3.5 9 3l1.8 4.3-2 1.4a11 11 0 0 0 5.5 5.5l1.4-2L20.0 14l-.5 2.5a2.5 2.5 0 0 1-2.5 2A13.5 13.5 0 0 1 4.5 6a2.5 2.5 0 0 1 2-2.5z"/></svg></a>
+      </div>
+      <nav>
+        {groups.map((g) => (
+          <div class="grp">
+            <a class:list={['h', { on: path.startsWith(g.href) }]} href={g.href}>{g.label}</a>
+            {g.sub && g.sub.map(([h, l]) => <a class="sub" href={h} target={h.startsWith('http') ? '_blank' : undefined} rel={h.startsWith('http') ? 'noopener' : undefined}>{l}</a>)}
+          </div>
+        ))}
+      </nav>
+    </aside>
     <main><slot /></main>
     <footer>
       <div class="wrap foot">
@@ -48,6 +69,15 @@ const nav = [['/news/', '뉴스'], ['/vendors/', '벤더 소개'], ['/group-buy/
         <p class="copy">© {new Date().getFullYear()} {site.company}</p>
       </div>
     </footer>
+    <script is:inline>
+      (function () {
+        var b = document.querySelector('.menu-btn'), d = document.getElementById('drawer'), sc = document.querySelector('.scrim'), x = d.querySelector('.x');
+        function set(o) { b.setAttribute('aria-expanded', o); d.setAttribute('aria-hidden', !o); d.inert = !o; sc.hidden = !o; document.documentElement.classList.toggle('menu-open', o); if (o) x.focus(); else b.focus(); }
+        b.addEventListener('click', function () { set(true); }); x.addEventListener('click', function () { set(false); }); sc.addEventListener('click', function () { set(false); });
+        d.addEventListener('click', function (e) { if (e.target.closest('a')) set(false); });
+        document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && b.getAttribute('aria-expanded') === 'true') set(false); });
+      })();
+    </script>
   </body>
 </html>
 
@@ -71,12 +101,19 @@ const nav = [['/news/', '뉴스'], ['/vendors/', '벤더 소개'], ['/group-buy/
   .top { position: sticky; top: 0; z-index: 10; background: color-mix(in srgb, var(--bg) 90%, transparent); backdrop-filter: blur(12px); border-bottom: 1px solid var(--line); }
   .bar { display: flex; align-items: center; justify-content: space-between; height: 72px; }
   .brand img { display: block; height: 34px; width: auto; }
-  nav { display: flex; align-items: center; gap: 4px; }
-  nav a { color: var(--ink); font-weight: 500; font-size: .95rem; padding: 8px 14px; border-radius: 999px; }
-  nav a:hover { background: var(--mist); text-decoration: none; }
-  nav a.on { color: var(--deep); background: var(--mist); }
-  nav a.cta { background: var(--ink); color: var(--bg); margin-left: 10px; padding: 9px 20px; }
-  nav a.cta:hover { background: var(--deep); color: #fff; }
+  .menu-btn { font: 600 .9rem/1 var(--display); letter-spacing: .14em; color: var(--ink); background: none; border: 0; padding: 12px 4px; cursor: pointer; }
+  .menu-btn:hover { color: var(--deep); }
+  .scrim { position: fixed; inset: 0; z-index: 20; background: color-mix(in srgb, var(--ink) 28%, transparent); backdrop-filter: blur(6px); }
+  .scrim[hidden] { display: none; }
+  .drawer { position: fixed; top: 0; right: 0; bottom: 0; z-index: 30; width: min(360px, 88vw); background: var(--bg); padding: 28px 28px 40px; overflow-y: auto; transform: translateX(100%); visibility: hidden; transition: transform .3s ease, visibility 0s .3s; box-shadow: -20px 0 50px -20px rgba(0,0,0,.25); }
+  .menu-open .drawer { transform: none; visibility: visible; transition: transform .3s ease; }
+  .menu-open { overflow: hidden; }
+  .drawer .x { display: block; margin-left: auto; font-size: 2rem; line-height: 1; font-weight: 300; background: none; border: 0; color: var(--ink); cursor: pointer; padding: 0 4px; }
+  .drawer .icons { display: flex; gap: 22px; margin: 18px 0 30px 4px; } .drawer .icons a { color: var(--ink); } .drawer .icons a:hover { color: var(--deep); }
+  .drawer .grp { padding: 18px 0; border-top: 1px solid var(--line); } .drawer .grp:first-child { border-top: 0; padding-top: 0; }
+  .drawer .grp a { display: block; text-decoration: none; }
+  .drawer .h { font-weight: 700; color: var(--ink); font-size: 1.02rem; letter-spacing: .02em; } .drawer .h:hover, .drawer .h.on { color: var(--deep); }
+  .drawer .sub { margin-top: 8px; color: var(--muted); font-size: .95rem; } .drawer .sub:hover { color: var(--deep); }
 
   .hero { color: #fff; background: linear-gradient(100deg, rgba(5,32,60,.78) 0%, rgba(8,70,120,.5) 55%, rgba(56,182,255,.2) 120%), var(--hero-bg, none) center/cover; }
   .hero-grid { display: grid; grid-template-columns: 1.2fr .8fr; gap: 56px; align-items: center; padding-top: 104px; padding-bottom: 104px; }
@@ -139,9 +176,9 @@ const nav = [['/news/', '뉴스'], ['/vendors/', '벤더 소개'], ['/group-buy/
   }
   @media (max-width: 760px) {
     .hero-grid { grid-template-columns: 1fr; gap: 36px; padding-top: 64px; padding-bottom: 64px; } .poster { width: 240px; justify-self: start; }
-    .bar { height: 64px; } nav a { padding: 7px 10px; font-size: .88rem; } nav a.cta { margin-left: 4px; padding: 7px 14px; }
+    .bar { height: 64px; }
     .pbanner .wrap { padding-top: 56px; padding-bottom: 56px; } section.block { padding-top: 52px; } .foot { grid-template-columns: 1fr; }
   }
-  @media (max-width: 560px) { .bar { height: auto; flex-wrap: wrap; padding-top: 10px; padding-bottom: 6px; } nav { width: 100%; order: 3; overflow-x: auto; gap: 2px; margin: 4px -10px 0; padding: 0 10px 4px; } nav a { white-space: nowrap; padding: 7px 8px; font-size: .86rem; } nav a.cta { margin-left: auto; padding: 7px 12px; } }
+  @media (max-width: 560px) { .bar { height: 60px; } }
   @media (prefers-reduced-motion: reduce) { * { transition: none !important; } html { scroll-behavior: auto; } }
 </style>
